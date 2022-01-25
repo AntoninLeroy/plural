@@ -1,0 +1,151 @@
+#mainBody {
+    background-image: url("../bgrd_dark_big.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #000000
+}
+.textBlock {
+    padding-top: 3vh;
+    padding-left: 10vh;
+    padding-right: 10vh;
+    padding-bottom: 10vh;
+    color: #f0f0f0;
+    background-color: #292d30;
+    text-align: justify;
+    text-justify: inter-word;
+}
+.img-in-text{
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    max-height:100%;
+    max-width:100%
+}
+.buttonRedirect{
+    background-color: #2059d4; /* Green */
+    border: none;
+    padding: 15px 32px;
+    margin-top: 3vh;
+}
+h3 {
+    color: rgb(130, 215, 255);
+}
+.text-a:link, .text-a:visited {
+    color: rgb(130, 215, 255);
+    text-decoration: none;
+}
+.text-a:hover, .text-a:active {
+    color: rgb(255, 167, 52);
+    text-decoration: none;
+}
+.button-href{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    font-size: 24px;
+}
+.button-href:hover, .button-href:active {
+    color: rgb(255, 167, 52);
+    text-decoration: none;
+}
+.fixed-panel {
+    max-height: 65vh;
+    background-color: #212529;
+    color: white;
+    overflow: auto;
+}
+ul.show, ul.show > li > a {
+    background-color: #212529;
+    color: white;
+}
+ul.show > li > a:hover {
+    background-color: #2e353d;
+    color: white;
+}
+.panel {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border: 6px solid transparent;
+    border-radius: 20px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.panel-info {
+    border-color: #0c2735;
+}
+.panel-info>.panel-heading {
+    color: rgba(255, 255, 255, 0.932);
+    background-color: #0c2735;
+    border-color: #0c2735;
+}
+.panel-footer {
+    padding: 10px 15px;
+    background-color: #0c2735;
+    border-top: 1px solid #0c2735;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px
+}
+.form-control {
+    background-color: rgb(255, 255, 255);
+}
+.full_div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.avatar {
+    height: fit-content;
+    width: 5%;
+    border-radius: 33px;
+}
+.text-chat {
+    width: 90;
+    font-size: 20px;
+    margin-left: 20px;
+    color: rgb(235, 235, 235);
+}
+.card {
+    color: rgb(235, 235, 235);
+    margin-top: 2vh;
+    margin-right: 10vh;
+    margin-left: 10vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #212529;
+    background-clip: border-box;
+    border: 0.5vh solid #0c2735;
+    border-radius: 0.5rem;
+}
+
+.card:hover {
+    background-color: #282e33;
+}
+
+.articleCard {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.fixed-bottom {
+    display: flex;
+    justify-content: center;
+ }
+
+.footer-div {
+    margin: 0.5vh;
+    color:rgb(209, 209, 209);
+ }
+
+.contact-icon {
+    text-decoration: none;
+    margin-left: 0.25vh;
+    margin-right: 0.25vh;
+}

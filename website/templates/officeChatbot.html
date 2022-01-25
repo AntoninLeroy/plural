@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}The Office - Chatbot{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" aria-current="page" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Live Applications
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="/officeChatbot">The Office - Chatbot</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/articles">Articles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="container background-color: rgb(255,0,255);">
+
+    <div id="chatPanel" class="panel panel-info">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-globe"></span><center>Welcome to the office.</center>
+        </div>
+        <div class="panel-body fixed-panel">
+            <ul class="media-list">
+            </ul>
+        </div>
+        <div class="panel-footer">
+            <form method="post" id="chatbot-form">
+                <div class="input-group">
+                    <input type="text" autocomplete="off" class="form-control" placeholder="Enter Message" name="messageText" id="messageText" autofocus/>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    $('#chatbot-form').submit(function(e) {
+        e.preventDefault();
+        var message = $('#messageText').val();
+        $(".media-list").append('<div class="full_div"><img class = "avatar" src="../static/characters/New_guy.png"/><div class = text-chat>' + '<font color="#87f8f3">New guy - </font>' + message + '</div></div>');
+    
+        var registerObj = {
+        "user_input": message 
+        }
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8001/api/talk",
+        data: JSON.stringify(registerObj),
+        contentType: "application/json",
+        success: function(response) {
+            $('#messageText').val('');
+            var speaker = response.character;
+            var answer = response.response;
+            $(".media-list").append('<div class="full_div"><img class = "avatar" src="../static/characters/' + speaker + '.png"/><div class = text-chat>' + '<font color="#7f9feb">'+ speaker + ' - </font>' + answer + '</div></div>');
+            $(".fixed-panel").stop().animate({ scrollTop: $(".fixed-panel")[0].scrollHeight}, 1000);
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    })
+
+});
+
+</script>
+
+{% endblock %}

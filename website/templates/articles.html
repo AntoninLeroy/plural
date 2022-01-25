@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Articles{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Live Applications
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="/officeChatbot">The Office - Chatbot</a></li>
+          </ul>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/articles">Articles</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <div class="card mb-3">
+    <a class = "articleCard" href="/articles/officeChatbot">
+      <img src="./static/dwight_matrix_banner.jpg" class="card-img-top" alt="...">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">The Office - Chatbot</h5>
+      <p class="card-text">Discover the logic behind the chatbot! From trying to implement a full deep learning approach to finding a method that actually works on small datasets.</p>
+      <p class="card-text"><small class="text-muted">19/01/2022</small></p>
+    </div>
+  </div>
+
+{% endblock %}

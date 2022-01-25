@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Article - The Office Chatbot{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Live Applications
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="/officeChatbot">The Office - Chatbot</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/articles">Articles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class = "textBlock">
+  <img src="../static/the_office_chatbot_banner.png" class="img-fluid" alt="the office cast banner chatbot">
+  <h3><br />The research phase</h3>
+  <p>I had been wanting to develop a chatbot based on data driven techniques for a long time. My first intuition was to look for 100% automatic methods. After a long research on deep learning in the context of a chatbot, I was forced to realize that this kind of application was not trivial because of the volume of data and the computational power needed to come up with a model that would generate coherent and intelligible answers.</p>
+  <p>In short, this approach consists in building a dataset of pairs of ("proposition" : "answer") for example ("How is your cat?" : "I don't have a cat") and then train an RNN to learn to respond to an awnser. The most interesting reference I could find on this technique was the youtuber sendex who put online a <a class = "text-a" href="https://www.youtube.com/watch?v=gFxiQXnt9w4">series of videos</a> where he uses a very rich database based on the written exchanges of the users of the website Reddit.</p>
+  <p>He then trained a seq2seq model of type "Neural machine translation with attention" (NMT) available on the tensorflow library which allows to divert the traditional use of this model, initially used for the automatic translation of language to a conversational use to design a chatbot.</p>
+  <p>After an intensive training of several days he obtained a viable chatbot that is able to generate unique and intelligible answers. I invite you to watch his videos to learn more about these methods.</p>
+  <h3>The dataset</h3>
+  <p>Having all this information in mind and not really knowing how to design my chatbot, I was looking for a dataset to start exploring and maybe find my inspiration. In many chatbots shared on the internet, we often find the <a class = "text-a" href="https://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html">Cornell Movie - Dialogs Corpus database</a>. But I wanted to stand out and try to create a fun and unique chatbot. While browsing on Kaggle I came across the dataset of the lines of the series "The Offlice US", and at the time I was also watching the series on Netflix. Perfect! I decided that I will develop a chatbot based on this dataset.</p>
+  <h3>Data formatting and NLP</h3>
+  <p>The first task was to match a sentence from the script to a response. This task is complex because in theory it would be necessary to validate for each ("proposal" : "answer") that the answer is well addressed to the person who formulates the proposal.</p>
+  <p>To build the ideal corpus we would need all these elements:<br />(Character: Pam, To: Nobody, Proposition: "It's very warm and soft", Resp_Character: Michael, Resp_to: Pam, Response: "That's what she said!")</p>
+  <p>However, we only have a "Character" and "Line" column. We will therefore proceed simply by considering systematically that the reply that comes after the proposal is a valid answer. Even if by using this method we are sure to have some pairs of ("proposal" : "answer") that are incorrect from a logical point of view, it is our only way to use this dataset without manually validating each pair.</p>
+  <p>From a NLP processing point of view, we make almost no structural changes except removing didascalia, removing special characters, and removing redundant spaces. No lemmatization or stemming, because we want to keep the subtleties contained in the dialogue.</p>
+  <h3>The method</h3>
+  <p>After having tried the 100% deep learning technique on this very low volume dataset and obtained very disturbing answers:</p>
+  <p><center><img class = "img-in-text" src="../static/bad_answer_rnn.PNG" class="img-fluid" alt="deep learning rnn bad output seq2seq"></center></p>
+  <p>I decided to think of more down to earth method. After many tests, here is the overall idea of how the chatbot works summarized on this diagram.</p>
+  <p><center><img class = "img-in-text" src="../static/chatbotdiagram_white_arrow.png" class="img-fluid" alt="chatbot diagram"></center></p>
+  <p>First we transform the whole original corpus (0) into a <a class = "text-a" href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF matrix</a> (6), then we enter a sentence as input (1), if it contains names of characters (2) we will restrict the possible answers to these characters (3). The next step is to apply the same pre-precessing and the same tf-idf vectorization (4) to our input sentence (1). We will then be able to compute the <a class = "text-a" href="https://en.wikipedia.org/wiki/Cosine_similarity">Cosine similarity</a> between our input sentence and the rest of the corpus in order to find the most semantically close replicas.</p>
+  <p>We will then proceed to a random draw weighted by the similarity score to select one of the sentences that resembles (in cosine distance) the sentence we entered as input. The chatbot will then sequentially answer the following line in the script. If the input sentence contains character names, only these characters can answer.</p>
+  <h3>Conclusion</h3>
+  <p>Thanks to this method, we've been able to build a chatbot that accepts any sentence as input and that answers us in an intelligible way thanks to a very small database. Because we don't give the chatbot the freedom to build its own answers, we are limited by the similarity that our input sentence has with the rest of the corpus. We can therefore expect to obtain answers that are sometimes quite far from the initial proposition if it does not have a strong similarity with one of the lign of the script. You can now test the chatbot for yourself on the website by clicking on the button below.</p>
+  <center><button class = "buttonRedirect" type=“button”><a class = "button-href" href="/officeChatbot">The Office - Chatbot</a></button></center>
+
+</div>
+
+{% endblock %}

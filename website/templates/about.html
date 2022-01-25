@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Live Applications
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="/officeChatbot">The Office - Chatbot</a></li>
+            </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="/articles">Articles</a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class = "textBlock">
+    <h1>Why Plural ?</h1>
+    <p>The idea of this site is to encourage diversification of skills and knowledge among students and engineers. This is a point of view that is rarely favored by companies, which generally prefer specialized profiles with many years of experience in a specific sector or discipline. I think this diversification of skills allows us to find new, more original and more effective approaches to solving the problems we encounter in our careers. It is also a great way to stimulate our creativity and come up with interesting business ideas.</p>
+    <p>Coming from an economics university myself, I was surprised by the possibilities I could consider professionally with a little self-study in computer science and a graduate internship in data science. After a few years working in this sector, I met many people with different profiles more or less compartmentalized in the company to a specific task as: Business analyst, Data analyst, BI consultant, Data engineers, front or back IT developers ...</p>
+    <p>Keeping this logic of self-training, this website is a way to train myself to general IT skills (frontend, backend, API, application deployment...) while sharing projects and topics that interest me and that I hope will you will find interesting too.</p>
+    <p style = "color : #9b9b9b">Antonin Leroy</p>
+  </div>
+
+{% endblock %}
