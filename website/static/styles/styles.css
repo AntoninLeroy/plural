@@ -4,7 +4,8 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    background-color: #000000
+    background-color: #000000;
+    overflow: auto;
 }
 .textBlock {
     padding-top: 3vh;
@@ -15,6 +16,7 @@
     background-color: #292d30;
     text-align: justify;
     text-justify: inter-word;
+    overflow: auto;
 }
 .img-in-text{
     margin-top: 3vh;
@@ -122,6 +124,7 @@ ul.show > li > a:hover {
     background-clip: border-box;
     border: 0.5vh solid #0c2735;
     border-radius: 0.5rem;
+    display: none;
 }
 
 .card:hover {
@@ -149,3 +152,33 @@ ul.show > li > a:hover {
     margin-left: 0.25vh;
     margin-right: 0.25vh;
 }
+
+.category-btn {
+    background-color: #212529;
+    border: none;
+    color: white;
+    padding: 0.75vh 1.75vh;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-top: 2vh;
+}
+
+.category-btn:hover {
+    background-color: rgb(43, 52, 56);
+  }
+  
+.category-btn.active {
+    background-color: #0c6480;
+    color: white;
+  }
+
+.global-articles-container {
+    overflow: hidden;
+}
+
+.show {
+    display: block;
+  }
