@@ -31,7 +31,16 @@
   </div>
 </nav>
 
-  <div class="card mb-3">
+<!-- Control buttons -->
+<div id="myBtnContainer">
+  <button class="category-btn active" onclick="filterSelection('all')">All</button>
+  <button class="category-btn" onclick="filterSelection('datascience')">Data Science</button>
+  <!-- <button class="category-btn" onclick="filterSelection('finance')">Finance</button> -->
+  <!-- <button class="category-btn" onclick="filterSelection('technology')">Technology</button> -->
+</div>
+
+<div class="global-articles-container">
+  <div class="card datascience mb-3">
     <a class = "articleCard" href="/articles/officeChatbot">
       <img src="./static/dwight_matrix_banner.jpg" class="card-img-top" alt="...">
     </a>
@@ -41,5 +50,12 @@
       <p class="card-text"><small class="text-muted">19/01/2022</small></p>
     </div>
   </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  filterSelection("all")
+});
+</script>
 
 {% endblock %}
