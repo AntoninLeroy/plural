@@ -241,7 +241,7 @@ ul.show > li > a:hover {
     }
 }
 
-@media (orientation: landscape) and (max-width: 500px){
+@media (orientation: landscape) and (max-width: 950px){
     .footer-div {
         font-size: 11px;
     }
