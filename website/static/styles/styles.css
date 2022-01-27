@@ -182,3 +182,120 @@ ul.show > li > a:hover {
 .show {
     display: block;
   }
+
+@media (max-width: 500px) {
+    .footer-div {
+        font-size: 11px;
+    }
+    .panel-heading{
+        font-size: 12px;
+    }
+    .row{
+        --bs-gutter-x: 0.2rem;
+    }
+    .form-control {
+        font-size: 14px;
+    }
+    .text-chat {
+        font-size: 14px;
+    }
+    .media-list {
+        margin-block-start: 2px;
+        margin-block-end: 2px;
+        padding-inline-start: 2px;
+    }
+    .full_div {
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+    .avatar {
+        width: 12%;
+        border-radius: 33px;
+    }
+    .fixed-panel {
+        max-height: 65vh;
+    }
+    .category-btn {
+        margin-top: 1vh;
+        font-size: 13px;
+    }
+    .card {
+        margin-top: 1vh;
+        margin-right: 1vh;
+        margin-left: 1vh;
+    }
+    .card-body {
+        font-size: 13px;
+    }
+    #mainBody {
+        font-size: 13px;
+    }
+    .textBlock {
+        padding-top: 1vh;
+        padding-left: 2vh;
+        padding-right: 2vh;
+        padding-bottom: 10vh;
+    }
+    .dropdown-la-choices {
+        font-size: 13px;
+    }
+}
+
+@media (orientation: landscape) {
+    .footer-div {
+        font-size: 11px;
+    }
+    .panel-heading{
+        font-size: 12px;
+    }
+    .form-control {
+        font-size: 14px;
+    }
+    .text-chat {
+        font-size: 14px;
+    }
+    .media-list {
+        margin-block-start: 2px;
+        margin-block-end: 2px;
+        padding-inline-start: 2px;
+    }
+    .full_div {
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+    .avatar {
+        width: 5%;
+        border-radius: 33px;
+    }
+    .fixed-panel {
+        max-height: 40vh;
+    }
+    .category-btn {
+        margin-top: 1vh;
+        font-size: 13px;
+    }
+    .card {
+        margin-top: 1vh;
+        margin-right: 1vh;
+        margin-left: 1vh;
+    }
+    .card-body {
+        font-size: 13px;
+    }
+    #mainBody {
+        font-size: 13px;
+    }
+    .textBlock {
+        padding-top: 1vh;
+        padding-left: 2vh;
+        padding-right: 2vh;
+        padding-bottom: 10vh;
+    }
+    .dropdown-la-choices {
+        font-size: 13px;
+    }
+    .panel {
+        margin-bottom: 1vh;
+        margin-top: 1vh;
+    }
+}

@@ -1,4 +1,3 @@
-
 function filterSelection(c) {
   var x, i;
   x = document.getElementsByClassName("card");
@@ -46,5 +45,21 @@ function addActiveClassButton() {
       current[0].className = current[0].className.replace(" active", "");
       this.className += " active";
     });
+  }
+}
+
+function handleFirstLoading() {
+  var filterContent = window.location.search;
+  if (filterContent == '') {
+    var allBtn = document.getElementById("all");
+    allBtn.className = allBtn.className.replace("category-btn", "category-btn active");
+    filterSelection("all");
+  } else {
+    var filterValue = filterContent.split("=")[1];
+    if (filterValue == 'datascience') {
+      var datascienceBtn = document.getElementById("datascience");
+      datascienceBtn.className = datascienceBtn.className.replace("category-btn", "category-btn active");
+      filterSelection("datascience");
+    }
   }
 }

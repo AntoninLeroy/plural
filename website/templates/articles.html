@@ -18,7 +18,7 @@
             Live Applications
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            <li><a class="dropdown-item" href="/officeChatbot">The Office - Chatbot</a></li>
+            <li><a class="dropdown-item" href="/officeChatbot"><span class = "dropdown-la-choices">The Office - Chatbot</span></a></li>
           </ul>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/articles">Articles</a>
@@ -33,8 +33,8 @@
 
 <!-- Control buttons -->
 <div id="myBtnContainer">
-  <button class="category-btn active" onclick="filterSelection('all')">All</button>
-  <button class="category-btn" onclick="filterSelection('datascience')">Data Science</button>
+  <button class="category-btn" id="all" onclick="filterSelection('all')">All</button>
+  <button class="category-btn" id = "datascience" onclick="filterSelection('datascience')">Data Science</button>
   <!-- <button class="category-btn" onclick="filterSelection('finance')">Finance</button> -->
   <!-- <button class="category-btn" onclick="filterSelection('technology')">Technology</button> -->
 </div>
@@ -54,7 +54,7 @@
 
 <script>
 $(document).ready(function() {
-  filterSelection("all")
+  handleFirstLoading()
 });
 </script>
 
