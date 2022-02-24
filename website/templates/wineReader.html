@@ -62,8 +62,7 @@
       <div class="card result col-md-12 col-xs-12">
         <img id="source" src="https://storage.googleapis.com/plural-storage/to_process/23022022_190109.jpg">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h5 class="card-title">Source photo</h5>
         </div>
       </div>
     </div>
@@ -71,8 +70,8 @@
       <div class="card result col-md-12 col-xs-12">
         <img id="unet_predict" src="https://storage.googleapis.com/plural-storage/to_process/23022022_190109.jpg">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h5 class="card-title">U-net prediction</h5>
+          <p class="card-text">Prediction of the label location based on a U-net type neural network trained on a small dataset of examples.</p>
         </div>
       </div>
     </div>
@@ -80,8 +79,8 @@
       <div class="card result col-md-12 col-xs-12">
         <img id="cylinder" src="https://storage.googleapis.com/plural-storage/to_process/23022022_190109.jpg">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h5 class="card-title">Cylinder edges</h5>
+          <p class="card-text">Binary transformation of the pixels (black or white), rotation to maximize the amount of all black columns and attempt to locate all 6 important points of the label cylinder via an custom iteration algorithm.</p>
         </div>
       </div>
     </div>
@@ -92,8 +91,8 @@
       <div class="card result  col-md-12 col-xs-12">
         <img id="mesh" src="">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h5 class="card-title">Mesh</h5>
+          <p class="card-text">Applying cylinder points to the source photo to compute the estimated geometry of the label.</p>
         </div>
       </div>
     </div>
@@ -101,8 +100,8 @@
       <div class="card result  col-md-12 col-xs-12">
         <img id="unwrapped" src="">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h5 class="card-title">Unwrap</h5>
+          <p class="card-text">Mathematical geometric interpolation to flatten the label to able optical character recognition (OCR).</p>
         </div>
       </div>
     </div>
