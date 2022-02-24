@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block title %}Wine Label Reader | Plural{% endblock %}
+
+{% block content %}
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" aria-current="page" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Live Applications
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="/officeChatbot"><span class = "dropdown-la-choices">The Office - Chatbot</span></a></li>
+              <li><a class="dropdown-item" href="/wineReader"><span class = "dropdown-la-choices">Wine Label Reader</span></a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/articles">Articles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="wineReaderDiv">
+
+  <h2>Wine Label Reader &#127863;</h2>
+  <p>This application takes an input photo of the front of a wine bottle, recognizes the label using computer vision techniques, flattens the label as if it were peeled off, and proceeds to read the label using Tesseract's optical character recognition (OCR) library.</p>
+
+  <div class="row">
+    <div class = "how-to-wine text-center">
+      <img class="tuto col-md-6 col-xs-12" src="./static/winereader_perspective.jpg">
+      <img class="tuto col-md-6 col-xs-12" src="./static/winereader_contrast.jpg">
+    </div>
+  </div>
+
+  <div class = "form-block text-center">
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" name="image">
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+
+  <div id='loader' style='display: none;'>
+    <h4>Please wait, our AI is processing your image ...</h4>
+    <img id="loading_img" src='./static/inugami-korone-processing.gif'>
+  </div>
+
+  <div id='result_block_1' class="displayNone row">
+    <div class = "result-space col-md-4 col-xs-12">
+      <div class="card result col-md-12 col-xs-12">
+        <img id="source" src="https://storage.googleapis.com/plural-storage/to_process/23022022_190109.jpg">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <div class = "result-space col-md-4 col-xs-12">
+      <div class="card result col-md-12 col-xs-12">
+        <img id="unet_predict" src="https://storage.googleapis.com/plural-storage/to_process/23022022_190109.jpg">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <div class = "result-space col-md-4 col-xs-12">
+      <div class="card result col-md-12 col-xs-12">
+        <img id="cylinder" src="https://storage.googleapis.com/plural-storage/to_process/23022022_190109.jpg">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id='result_block_2' class="displayNone row">
+    <div class = "result-space col-md-4 col-xs-12">
+      <div class="card result  col-md-12 col-xs-12">
+        <img id="mesh" src="">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <div class = "result-space col-md-4 col-xs-12">
+      <div class="card result  col-md-12 col-xs-12">
+        <img id="unwrapped" src="">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+    </div>
+    <div class = "result-space col-md-4 col-xs-12">
+      <div id="result_ocr" class=" card result col-md-12 col-xs-12">
+        <h4>OCR tesseract</h4>
+        <p id="ocr_text_result"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    var inputCall = {
+        "img_url": '{{url_img}}'
+        }
+      
+    var ocr;
+    var unet_predict_url;
+    var cylinder_url;
+    var mesh_url;
+    var unwrapped_url;
+
+    if (inputCall.img_url.length > 0) {
+
+      $.ajax({
+      type: "POST",
+      url: "https://winereaderapi.plural.run/readLabel",
+      data: JSON.stringify(inputCall),
+      contentType: "application/json",
+      beforeSend: function(){
+        $("#loader").show();
+      },
+      success: function(response) {
+          ocr = response.unwrapped_ocr.replace(/(?:\r\n|\r|\n)/g, "<br>");
+          unet_predict_url = response.unet_predict_url;
+          cylinder_url = response.cylinder_url;
+          mesh_url = response.mesh_url;
+          unwrapped_url = response.unwrapped_url;
+
+          document.getElementById("source").src = inputCall.img_url;
+          document.getElementById("unet_predict").src = unet_predict_url;
+          document.getElementById("cylinder").src = cylinder_url;
+          document.getElementById("mesh").src = mesh_url;
+          document.getElementById("unwrapped").src = unwrapped_url;
+          document.getElementById("ocr_text_result").innerHTML = ocr;
+
+          $('#result_block_1').removeClass("displayNone");
+          $('#result_block_2').removeClass("displayNone");
+
+          $('#result_block_1').addClass("displayFlex");
+          $('#result_block_2').addClass("displayFlex");
+
+      },
+      error: function(error) {
+          console.log(error);
+      },
+      complete: function(){
+        $("#loader").hide();
+      },
+    })
+
+    }
+
+  </script>
+
+</div>
+
+{% endblock %}

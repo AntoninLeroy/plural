@@ -10,6 +10,10 @@ def home():
 def officeChatbot():
     return render_template("officeChatbot.html")
 
+@views.route('/wineReader')
+def wineReader():
+    return render_template("wineReader.html")
+
 @views.route('/articles')
 def articles():
     return render_template("articles.html")

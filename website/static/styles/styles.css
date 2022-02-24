@@ -110,7 +110,7 @@ ul.show > li > a:hover {
     margin-left: 20px;
     color: rgb(235, 235, 235);
 }
-.card {
+/*.card {
     color: rgb(235, 235, 235);
     margin-top: 2vh;
     margin-right: 10vh;
@@ -125,10 +125,19 @@ ul.show > li > a:hover {
     border: 0.5vh solid #0c2735;
     border-radius: 0.5rem;
     display: none;
-}
-
-.card:hover {
-    background-color: #282e33;
+}*/
+.card {
+    color: rgb(235, 235, 235);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #212529;
+    background-clip: border-box;
+    border: 0.5vh solid #0c2735;
+    border-radius: 0.5rem;
+    display: none;
 }
 
 .articleCard {
@@ -183,6 +192,97 @@ ul.show > li > a:hover {
     display: block;
   }
 
+.datascience{
+    margin : 2vh
+}
+
+.wineReaderDiv{
+    padding-top: 1.5vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    padding-bottom: 1.5vh;
+    color: #e7e7e7;
+    background-color: #292d30;
+    margin-bottom: 20vh;
+}
+
+#loader{
+    margin: auto;
+    text-align: center;
+    padding: 3vh;
+}
+
+#loading_img{
+    width:50vh;
+    height: auto
+}
+
+#result_block_1{
+    flex-direction: row; 
+    align-content: center;
+    margin-top: 2vh;
+}
+#result_block_2{
+    flex-direction: row; 
+    align-content: center;
+    margin-top: 2vh;
+    margin-bottom: 10vh
+}
+
+.displayNone {
+    display: none;
+}
+.displayFlex { 
+    display: flex;
+}
+/*
+.result{
+    color: rgb(226, 226, 226);
+    margin-top: 4vh;
+    margin-right: 2vh;
+    margin-left: 2vh;
+    margin-bottom: 4vh;
+    display: flex;
+    background-color: #212529;
+    background-clip: border-box;
+    border: 0.5vh solid #1f1f1f;
+    border-radius: 0.5rem;
+    width: 45vh;
+    height: 65vh;
+}*/
+
+.result{
+    color: rgb(226, 226, 226);
+    display: flex;
+    background-color: #212529;
+    background-clip: border-box;
+    border: 0.5vh solid #1f1f1f;
+    border-radius: 0.5rem;
+}
+
+#result_ocr{
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-overflow: ellipsis;
+}
+
+.result-space{
+    margin-bottom: 4vh;
+}
+
+.tuto{
+    width: 50vh;
+    margin-bottom: 2vh;
+    padding-left: 5vh;
+    padding-right: 5vh;
+    height:auto
+}
+
+.form-block{
+    background-color: #1d1d1f;
+    padding: 1vh;
+}
+
 @media (max-width: 500px) {
     .footer-div {
         font-size: 11px;
@@ -219,11 +319,12 @@ ul.show > li > a:hover {
         margin-top: 1vh;
         font-size: 13px;
     }
+    /*
     .card {
         margin-top: 1vh;
         margin-right: 1vh;
         margin-left: 1vh;
-    }
+    }*/
     .card-body {
         font-size: 13px;
     }
@@ -274,11 +375,11 @@ ul.show > li > a:hover {
         margin-top: 1vh;
         font-size: 13px;
     }
-    .card {
+    /*.card {
         margin-top: 1vh;
         margin-right: 1vh;
         margin-left: 1vh;
-    }
+    }*/
     .card-body {
         font-size: 13px;
     }
