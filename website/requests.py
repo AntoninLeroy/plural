@@ -5,7 +5,7 @@ import datetime
 import os
 
 BUCKET_NAME = "plural-storage"
-storage_client = storage.Client()
+#storage_client = storage.Client()
 
 requests = Blueprint('requests', __name__)
 

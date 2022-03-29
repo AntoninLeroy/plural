@@ -35,13 +35,14 @@
 <!-- Control buttons -->
 <div id="myBtnContainer">
   <button class="category-btn" id="all" onclick="filterSelection('all')">All</button>
-  <button class="category-btn" id = "datascience" onclick="filterSelection('datascience')">Data Science</button>
-  <!-- <button class="category-btn" onclick="filterSelection('finance')">Finance</button> -->
+  <button class="category-btn" id = "nlp" onclick="filterSelection('nlp')">NLP</button>
+  <button class="category-btn" id = "comp_vi" onclick="filterSelection('comp_vi')">Computer Vision</button>
   <!-- <button class="category-btn" onclick="filterSelection('technology')">Technology</button> -->
 </div>
 
 <div class="global-articles-container">
-  <div class="card datascience mb-3">
+
+  <div class="card nlp mb-3">
     <a class = "articleCard" href="/articles/officeChatbot">
       <img src="./static/dwight_matrix_banner.jpg" class="card-img-top" alt="...">
     </a>
@@ -51,7 +52,20 @@
       <p class="card-text"><small class="text-muted">19/01/2022</small></p>
     </div>
   </div>
+
+  <div class="card comp_vi mb-3">
+    <a class = "articleCard" href="/articles/wineReader">
+      <img src="./static/wineReader_banner.jpg" class="card-img-top" alt="...">
+    </a>
+    <div class="card-body">
+      <h5 class="card-title">How to read a label on a wine bottle using computer vision ?</h5>
+      <p class="card-text">In this article I explain how the solution works in detail: From training a U-net to detect the location of the label to actually reading via tesseract library what's written on the unwraped label.</p>
+      <p class="card-text"><small class="text-muted">24/03/2022</small></p>
+    </div>
+  </div>
+
 </div>
+
 
 <script>
 $(document).ready(function() {

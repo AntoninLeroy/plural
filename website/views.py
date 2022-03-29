@@ -22,6 +22,10 @@ def articles():
 def articleOfficeChatbot():
     return render_template("articleOfficeChatbot.html")
 
+@views.route('/articles/wineReader')
+def articleWineReader():
+    return render_template("articleWineReader.html")
+
 @views.route('/about')
 def about():
     return render_template("about.html")

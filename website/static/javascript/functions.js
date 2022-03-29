@@ -56,10 +56,15 @@ function handleFirstLoading() {
     filterSelection("all");
   } else {
     var filterValue = filterContent.split("=")[1];
-    if (filterValue == 'datascience') {
-      var datascienceBtn = document.getElementById("datascience");
-      datascienceBtn.className = datascienceBtn.className.replace("category-btn", "category-btn active");
-      filterSelection("datascience");
+    if (filterValue == 'nlp') {
+      var nlp_Btn = document.getElementById("nlp");
+      nlp_Btn.className = nlp_Btn.className.replace("category-btn", "category-btn active");
+      filterSelection("nlp");
+    }
+    if (filterValue == 'comp_vi') {
+      var comp_vi_Btn = document.getElementById("comp_vi");
+      comp_vi_Btn.className = comp_vi_Btn.className.replace("category-btn", "category-btn active");
+      filterSelection("comp_vi");
     }
   }
 }
