@@ -77,15 +77,15 @@
   <p>During my research, I had the chance to stumble upon <a class = "text-a" href="https://github.com/Nepherhotep/unwrap_labels">an awesome github project</a> by Alexey Zankevich that does exactly that. Before using his repository and write this article, it’s important to mention that I asked him a formal authorization to use his code and mention his work in this article.</p>
   <p>I will not explain in detail how his library works because I simply did not code it and I do not master the geometric concept he uses, but in simple words the library allows to “unwrap” the wine label by positioning manually 6 points around the edges of the label cylinder. Then the code is generating and mapping a lot of points that follow the estimated geometry of the cylinder and to apply an interpolation of those points with the scipy library to a destination map that is geometrically flat. By doing this we get a visual approximation of a flat label.</p>
   <p>The thing is that we need to find a way to automatically position those 6 points on our U-Net image prediction. Let’s take one photo example we will use until the end of this article:</p>
-  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*RIx_YZF4Yxgiy5W_iwJsfA.jpeg" class="img-fluid" alt="wine bottle" width="auto" height="700"></center></p>
+  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*RIx_YZF4Yxgiy5W_iwJsfA.jpeg" class="img-fluid" alt="wine bottle" width="500" height="auto"></center></p>
   <p><center><img class = "img-in-text" src="https://miro.medium.com/max/512/1*wCi776Xx-xJNOlra1QZlxw.jpeg" class="img-fluid" alt="wine bottle"></center></p>
   <p>Once we get our U-net prediction we need to reshape it back to the original source photo size, that way once we find our 6 point coordinates we can place them correctly in the original photo. Also we want the label to be vertically aligned and we only want binary colors (black or white pixels). To do so, we use this bit of code from the <a class = "text-a" href="https://github.com/AntoninLeroy/wine_label_reader_toolkit/blob/eb2c14ba4f9a1b6efaa476696439754a9abde8ce/wineReader/labelVision.py#L572">readLabels</a> method of the package.</p>
   <script src="https://gist.github.com/AntoninLeroy/844e437e9ffb2d278a11fce965fdca2f.js"></script>
-  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*zSy8HrOanlRDF1cqdeDwaQ.jpeg" class="img-fluid" alt="wine bottle" width="auto" height="700"></center></p>
+  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*zSy8HrOanlRDF1cqdeDwaQ.jpeg" class="img-fluid" alt="wine bottle" width="500" height="auto"></center></p>
   <p>A few words about the vertical align algorithm I implemented, it simply tries to maximize the number of fully black columns so here you can see we cannot say that the alignment is perfect because there is some imperfect detection of the shape of the cylinder, but I choose not to take a perfect example to show that it works in imperfect scenarios.</p>
   <p>So now let’s talk about the way I managed to estimate and position the 6 points we need to use the unwrapping label code. My idea was to find an iterative way to detect the corners first, As with the vertical align algorithm I used a logic of “full black column” as a condition to keep iterating, so basically: Scan from side to side and stop as soon as there is a column with at least 1 white pixel in it etc… But the problem was that I did not manage to find all corners with this logic because usually the cylinder has perspective and thus either the top or bottom part is bigger than the other…</p>
   <p>And then I remembered about matrix diagonals ! What if instead of iterating with columns and rows, I could find a way to iterate with diagonals like so:</p>
-  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*SkFr9ZWCXjyvkelr-C4yeA.gif" class="img-fluid" alt="wine bottle" width="auto" height="700"></center></p>
+  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*SkFr9ZWCXjyvkelr-C4yeA.gif" class="img-fluid" alt="wine bottle" width="500" height="auto"></center></p>
   <p>This way I’ll be able to find A,C,D and F coordinates points with diagonals and find B coordinate by calculating the simple distance:</p>
   <p><center><img class = "img-in-text" src="https://miro.medium.com/max/530/1*nQx3HcTgFLpV93JXO6ioBQ.png" class="img-fluid" alt="math"></center></p>
   <p>Where XB is the X coordinate for the point B. We can now select the column vector (lambda) of the image corresponding to this XB position:</p>
@@ -95,8 +95,8 @@
   <p>The logic is the same for the E point: we find the column vector in the middle of the D and F point and this time we iterate from bottom to top until we find our first white pixel.</p>
   <p><i>To get the detail of the implementation, please check the method <a class = "text-a" href="https://github.com/AntoninLeroy/wine_label_reader_toolkit/blob/eb2c14ba4f9a1b6efaa476696439754a9abde8ce/wineReader/labelVision.py#L420">getCylinderPoints</a> from the package.</i></p>
   <p>Now that we have our 6 coordinates, we can use the <a class = "text-a" href="https://github.com/AntoninLeroy/wine_label_reader_toolkit/blob/eb2c14ba4f9a1b6efaa476696439754a9abde8ce/wineReader/labelVision.py#L64">“unwrap label” code</a>.</p>
-  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*N_H2dW1qQ4DbsGgULZkccA.jpeg" class="img-fluid" alt="wine bottle" width="auto" height="700"></center></p>
-  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*82JBXaZ1nc2EQjNqc0JFFQ.jpeg" class="img-fluid" alt="wine bottle" width="auto" height="500"></center></p>
+  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*N_H2dW1qQ4DbsGgULZkccA.jpeg" class="img-fluid" alt="wine bottle" width="500" height="auto"></center></p>
+  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*82JBXaZ1nc2EQjNqc0JFFQ.jpeg" class="img-fluid" alt="wine bottle" width="500" height="auto"></center></p>
   <p>TADA ! And finally we now have an almost perfectly flat label to try to apply the pytesseract OCR library on it. To see the difference between the original (curved) image and the flatten one I put both OCR transcript to demonstrate that we did not do all this work for nothing !</p>
   <p><b>Original image OCR:</b></p>
   <blockquote>
@@ -118,7 +118,7 @@
       PRODUIT DE FRANCE</p>
   </blockquote>
   <p>So it is absolutely not perfect but there’s definitely an improvement. The photo in itself has some lighting difference that seems to affect the OCR. Here are a few other examples I tested:</p>
-  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*1LY9sfclRL7Yzxp2LQbMFQ.jpeg" class="img-fluid" alt="wine bottle" width="auto" height="700"></center></p>
+  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*1LY9sfclRL7Yzxp2LQbMFQ.jpeg" class="img-fluid" alt="wine bottle" width="500" height="auto"></center></p>
   <blockquote>
     <p>R
       ORDEAUX SUPER!
@@ -138,7 +138,7 @@
     BORDEAUX SUPERIEUR
     APPELLATION BORDEAUX SUPERIEUR CONTROLEE</p>
   </blockquote>
-  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*EjwaP8srLkmF3a8pPGQ4Ag.jpeg" class="img-fluid" alt="wine bottle" width="auto" height="700"></center></p>
+  <p><center><img class = "img-in-text" src="https://miro.medium.com/max/1400/1*EjwaP8srLkmF3a8pPGQ4Ag.jpeg" class="img-fluid" alt="wine bottle" width="500" height="auto"></center></p>
   <blockquote>
     <p>Pav
       | i YS dD’ :
